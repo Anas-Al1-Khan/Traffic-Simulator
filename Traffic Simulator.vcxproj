@@ -139,8 +139,20 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Graph.cpp" />
+=======
+    <ClCompile Include="gui.cpp" />
+>>>>>>> feature-GUI
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_queue.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HeaderFile.h" />
+    <ClInclude Include="ManualCircularQueue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h" />
