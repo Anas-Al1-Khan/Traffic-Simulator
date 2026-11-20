@@ -139,11 +139,9 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="Graph.cpp" />
-=======
+
     <ClCompile Include="gui.cpp" />
->>>>>>> feature-GUI
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_queue.cpp" />
   </ItemGroup>
