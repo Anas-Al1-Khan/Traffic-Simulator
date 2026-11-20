@@ -26,28 +26,23 @@ void Simulation::spawnVehicle(int start, int end, bool emergency) {
     v.isFinished = false;
     v.currentIndex = 0;
 
-    // Run Dijkstra to get the path
-    int parent[10]; // Max nodes
+    int parent[10];
     graph->Dijkstra(start, end, parent);
 
-    // Reconstruct the path into the Vehicle's array
     int tempPath[10];
     int length = 0;
     int curr = end;
 
-    // If no path exists, don't spawn
     if (parent[end] == -1 && start != end) {
         std::cout << "Vehicle " << v.id << " cannot spawn: No path to destination.\n";
         return;
     }
 
-    // Backtrack from end to start
     while (curr != -1) {
         tempPath[length++] = curr;
         curr = parent[curr];
     }
 
-    // Reverse the path so it goes start -> end
     v.pathLength = length;
     for (int i = 0; i < length; i++) {
         v.path[i] = tempPath[length - 1 - i];
@@ -62,10 +57,8 @@ void Simulation::advanceTime() {
         Vehicle& v = vehicles[i];
         if (v.isFinished) continue;
 
-        // Move to the next node in the path
         v.currentIndex++;
 
-        // Check if it reached the end
         if (v.currentIndex >= v.pathLength - 1) {
             v.isFinished = true;
             std::cout << "Vehicle " << v.id << " completed its trip.\n";

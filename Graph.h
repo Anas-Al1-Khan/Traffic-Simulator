@@ -2,28 +2,32 @@
 #include <iostream>
 #include <climits>
 
-class Road {												// Apparently an edge of a graph (Road)
-public:
+struct Road {
+    int destinationId;
+    int weight;
+    Road* next;
 
-	int destinationId;
-	int weight;
-	Road* next;
-
-	Road(int destinationId, int weight);
+    // Constructor
+    Road(int d, int w) {
+        destinationId = d;
+        weight = w;
+        next = nullptr;
+    }
 };
 
 class Graph {
 private:
-	int intersections;
-	Road** adjList;
+    int intersections;
+    Road** adjList;
+
 public:
-	Graph(int n);
-	~Graph();
+    Graph(int n);
+    ~Graph();
 
-	void addRoad(int src, int dest, int weight);
-	void printGraph() const;
-	int getIntersections() const { return intersections; }
-	void Dijkstra(int start, int end, int* parent);
-	void printPath(int start, int end, int* parent);	
+    void addRoad(int src, int dest, int weight);
+    void printGraph() const;
+    int getNumIntersections() const { return intersections; }
+
+    void Dijkstra(int start, int end, int* parent);
+    void printPath(int start, int end, int* parent);
 };
-

@@ -5,7 +5,6 @@
 using namespace std;
 
 int main() {
-    // 1. Setup the Map
     Graph map(6);
     map.addRoad(0, 1, 4);
     map.addRoad(0, 2, 2);
@@ -14,29 +13,23 @@ int main() {
     map.addRoad(3, 4, 3);
     map.addRoad(4, 5, 2);
 
-    // 2. Setup the Simulation (Max 10 vehicles)
+    cout << "--- 1. Map Structure ---" << endl;
+    map.printGraph();
+    cout << "------------------------\n" << endl;
+
     Simulation sim(&map, 10);
 
-    // 3. Spawn Vehicles
-    sim.spawnVehicle(0, 4, false); // Normal car
-    sim.spawnVehicle(0, 5, true);  // Ambulance (Emergency)
+    cout << "--- 2. Spawning Vehicles ---" << endl;
+    sim.spawnVehicle(0, 4, false); // Normal car from 0 to 4
+    sim.spawnVehicle(0, 5, true);  // Ambulance from 0 to 5
 
-    // 4. Simulate Time (Ticks)
-    cout << "\n--- Tick 1 ---" << endl;
-    sim.advanceTime();
-    sim.printState();
-
-    cout << "\n--- Tick 2 ---" << endl;
-    sim.advanceTime();
-    sim.printState();
-
-    cout << "\n--- Tick 3 ---" << endl;
-    sim.advanceTime();
-    sim.printState();
-
-    cout << "\n--- Tick 4 ---" << endl;
-    sim.advanceTime();
-    sim.printState();
+    cout << "\n--- 3. Simulation Ticks ---" << endl;
+    for (int i = 1; i <= 4; i++) {
+        cout << "Tick " << i << ":" << endl;
+        sim.advanceTime();
+        sim.printState();
+        cout << endl;
+    }
 
     return 0;
 }

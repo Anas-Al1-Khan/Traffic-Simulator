@@ -140,10 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="gui.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Simulation.cpp" />
-    <ClCompile Include="test_queue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeaderFile.h" />
