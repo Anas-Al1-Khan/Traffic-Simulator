@@ -28,7 +28,7 @@ void Simulation::spawnVehicle(int start, int end, bool emergency) {
 
     // Run Dijkstra to get the path
     int parent[10]; // Max nodes
-    graph->dijkstra(start, end, parent);
+    graph->Dijkstra(start, end, parent);
 
     // Reconstruct the path into the Vehicle's array
     int tempPath[10];
