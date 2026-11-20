@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Traffic Simulator.vcxproj" />
+  <Project Path="Traffic Simulator.vcxproj" Id="c5040b56-cf01-4fba-bb15-4a338317dc6b" />
 </Solution>
