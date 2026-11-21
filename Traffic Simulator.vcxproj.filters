@@ -6,6 +6,11 @@
     <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="ManualHashTable.cpp" />
     <ClCompile Include="test_hashtable_main.cpp" />
+    <ClCompile Include="ManualMinHeap.cpp" />
+    <ClCompile Include="EmergencyQueue.cpp" />
+    <ClCompile Include="TrafficLight.cpp" />
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="test_day5_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeaderFile.h" />
@@ -13,6 +18,10 @@
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="ManualHashTable.h" />
+    <ClInclude Include="ManualMinHeap.h" />
+    <ClInclude Include="EmergencyQueue.h" />
+    <ClInclude Include="TrafficLight.h" />
+    <ClInclude Include="Stats.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

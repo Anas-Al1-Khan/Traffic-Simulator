@@ -139,19 +139,30 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EmergencyQueue.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="ManualHashTable.cpp" />
+    <ClCompile Include="ManualMinHeap.cpp" />
     <ClCompile Include="Simulation.cpp" />
-    <ClCompile Include="test_hashtable_main.cpp" />
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="test_day5_main.cpp" />
+    <ClCompile Include="test_hashtable_main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TrafficLight.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EmergencyQueue.h" />
     <ClInclude Include="HeaderFile.h" />
     <ClInclude Include="ManualCircularQueue.h" />
     <ClInclude Include="ManualHashTable.h" />
+    <ClInclude Include="ManualMinHeap.h" />
     <ClInclude Include="Simulation.h" />
+    <ClInclude Include="Stats.h" />
+    <ClInclude Include="TrafficLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
