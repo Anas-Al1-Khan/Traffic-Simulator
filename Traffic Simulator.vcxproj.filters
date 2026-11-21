@@ -1,49 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Graph.cpp">
-=======
-    <ClCompile Include="gui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="test_queue.cpp">
->>>>>>> feature-GUI
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="tests\test_queue.cpp">
+      <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClInclude Include="Graph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
-    <ClInclude Include="HeaderFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ManualCircularQueue.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HeaderFile.h" />
+    <ClInclude Include="ManualCircularQueue.h" />
+    <ClInclude Include="Simulation.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="src\ManualCircularQueue.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
->>>>>>> feature-GUI
+    <Text Include="build\CMakeCache.txt">
+      <Filter>build</Filter>
+    </Text>
+    <Text Include="build\CMakeFiles\TargetDirectories.txt">
+      <Filter>build\CMakeFiles</Filter>
+    </Text>
+    <Text Include="build\CMakeFiles\4.3.1-msvc1\VCTargetsPath.txt">
+      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{9579b53d-34cb-40ef-9f42-b6abc4766981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build">
+      <UniqueIdentifier>{9eeb6eb1-6088-4381-a9c1-13fd9fe003fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build\CMakeFiles">
+      <UniqueIdentifier>{48ab9b6c-60c5-48aa-8cb5-8b634830c08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build\CMakeFiles\4.3.1-msvc1">
+      <UniqueIdentifier>{e930fc4d-aaa8-4434-b2d9-68e1fcb4ca0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build\CMakeFiles\64865a9f493fa6d1c989e1c50233f64e">
+      <UniqueIdentifier>{7cb84899-f27a-4ba7-9386-3b02f193d8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX">
+      <UniqueIdentifier>{88a26373-9bbf-48b8-9b87-29da37efe59e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tests">
+      <UniqueIdentifier>{0442916c-7d50-4784-8688-cb33367298ff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build\ALL_BUILD.vcxproj">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\ALL_BUILD.vcxproj.filters">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\cmake_install.cmake">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\test_queue.vcxproj">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\test_queue.vcxproj.filters">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\TrafficSim.slnx">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\ZERO_CHECK.vcxproj">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\ZERO_CHECK.vcxproj.filters">
+      <Filter>build</Filter>
+    </None>
+    <None Include="build\CMakeFiles\cmake.check_cache">
+      <Filter>build\CMakeFiles</Filter>
+    </None>
+    <None Include="build\CMakeFiles\CMakeConfigureLog.yaml">
+      <Filter>build\CMakeFiles</Filter>
+    </None>
+    <None Include="build\CMakeFiles\generate.stamp">
+      <Filter>build\CMakeFiles</Filter>
+    </None>
+    <None Include="build\CMakeFiles\generate.stamp.depend">
+      <Filter>build\CMakeFiles</Filter>
+    </None>
+    <None Include="build\CMakeFiles\generate.stamp.list">
+      <Filter>build\CMakeFiles</Filter>
+    </None>
+    <None Include="build\CMakeFiles\InstallScripts.json">
+      <Filter>build\CMakeFiles</Filter>
+    </None>
+    <None Include="build\CMakeFiles\64865a9f493fa6d1c989e1c50233f64e\generate.stamp.rule">
+      <Filter>build\CMakeFiles\64865a9f493fa6d1c989e1c50233f64e</Filter>
+    </None>
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeCXXCompiler.cmake">
+      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
+    </None>
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeDetermineCompilerABI_CXX.bin">
+      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
+    </None>
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeRCCompiler.cmake">
+      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
+    </None>
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeSystem.cmake">
+      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
+    </None>
+    <None Include="build\CMakeFiles\4.3.1-msvc1\VCTargetsPath.vcxproj">
+      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
+    </None>
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX\CompilerIdCXX.exe">
+      <Filter>build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX</Filter>
+    </None>
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX\CompilerIdCXX.vcxproj">
+      <Filter>build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX</Filter>
+    </None>
   </ItemGroup>
 </Project>
