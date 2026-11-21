@@ -4,15 +4,26 @@
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Simulation.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="tests\test_queue.cpp">
       <Filter>tests</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="ManualHashTable.cpp" />
+    <ClCompile Include="test_hashtable_main.cpp" />
+    <ClCompile Include="ManualMinHeap.cpp" />
+    <ClCompile Include="EmergencyQueue.cpp" />
+    <ClCompile Include="TrafficLight.cpp" />
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="test_day5_main.cpp" />
+>>>>>>> 4c931527fc4c6a68d88280f73573914c0e565028
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeaderFile.h" />
     <ClInclude Include="ManualCircularQueue.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="Graph.h" />
+<<<<<<< HEAD
     <ClInclude Include="src\ManualCircularQueue.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -119,5 +130,15 @@
     <None Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX\CompilerIdCXX.vcxproj">
       <Filter>build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX</Filter>
     </None>
+=======
+    <ClInclude Include="ManualHashTable.h" />
+    <ClInclude Include="ManualMinHeap.h" />
+    <ClInclude Include="EmergencyQueue.h" />
+    <ClInclude Include="TrafficLight.h" />
+    <ClInclude Include="Stats.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+>>>>>>> 4c931527fc4c6a68d88280f73573914c0e565028
   </ItemGroup>
 </Project>
