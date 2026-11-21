@@ -177,6 +177,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="EmergencyQueue.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="ManualHashTable.cpp" />
@@ -186,6 +187,12 @@
     <ClCompile Include="src\mainwindow.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="TrafficLight.cpp" />
+=======
+    <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="gui.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_queue.cpp" />
+>>>>>>> c6c153b (VCX proj file fixed)
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EmergencyQueue.h" />
