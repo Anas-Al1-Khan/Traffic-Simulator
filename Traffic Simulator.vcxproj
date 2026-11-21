@@ -140,12 +140,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ManualHashTable.cpp" />
     <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="test_hashtable_main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeaderFile.h" />
     <ClInclude Include="ManualCircularQueue.h" />
+    <ClInclude Include="ManualHashTable.h" />
     <ClInclude Include="Simulation.h" />
   </ItemGroup>
   <ItemGroup>
