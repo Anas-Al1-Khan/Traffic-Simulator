@@ -147,6 +147,12 @@
     <ClCompile Include="ManualHashTable.cpp" />
     <ClCompile Include="ManualMinHeap.cpp" />
     <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="tests\test_queue.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="test_day5_main.cpp" />
     <ClCompile Include="test_hashtable_main.cpp">
@@ -161,14 +167,42 @@
     <ClInclude Include="ManualHashTable.h" />
     <ClInclude Include="ManualMinHeap.h" />
     <ClInclude Include="Simulation.h" />
+    <ClInclude Include="src\ManualCircularQueue.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="TrafficLight.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="build\CMakeCache.txt" />
+    <Text Include="build\CMakeFiles\4.3.1-msvc1\VCTargetsPath.txt" />
+    <Text Include="build\CMakeFiles\TargetDirectories.txt" />
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build\ALL_BUILD.vcxproj" />
+    <None Include="build\ALL_BUILD.vcxproj.filters" />
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeCXXCompiler.cmake" />
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeDetermineCompilerABI_CXX.bin" />
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeRCCompiler.cmake" />
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeSystem.cmake" />
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX\CompilerIdCXX.exe" />
+    <None Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX\CompilerIdCXX.vcxproj" />
+    <None Include="build\CMakeFiles\4.3.1-msvc1\VCTargetsPath.vcxproj" />
+    <None Include="build\CMakeFiles\64865a9f493fa6d1c989e1c50233f64e\generate.stamp.rule" />
+    <None Include="build\CMakeFiles\cmake.check_cache" />
+    <None Include="build\CMakeFiles\CMakeConfigureLog.yaml" />
+    <None Include="build\CMakeFiles\generate.stamp" />
+    <None Include="build\CMakeFiles\generate.stamp.depend" />
+    <None Include="build\CMakeFiles\generate.stamp.list" />
+    <None Include="build\CMakeFiles\InstallScripts.json" />
+    <None Include="build\cmake_install.cmake" />
+    <None Include="build\test_queue.vcxproj" />
+    <None Include="build\test_queue.vcxproj.filters" />
+    <None Include="build\TrafficSim.slnx" />
+    <None Include="build\ZERO_CHECK.vcxproj" />
+    <None Include="build\ZERO_CHECK.vcxproj.filters" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
