@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
     isCDRoadClosed = false; // Initialize flag
     setCentralWidget(centralWidget);
-    setWindowTitle("Traffic Management Simulator - Day 5: Emergency");
+    setWindowTitle("Traffic Management Simulator - Final Prototype");
 
     // 4. Setup Logic (Using the 5 nodes A, B, C, D, E)
     map = new Graph(5);
