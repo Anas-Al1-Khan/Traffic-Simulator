@@ -1,9 +1,17 @@
+#include <QGraphicsDropShadowEffect>
 #include "vehicleitem.h"
 #include <QPen>
 #include <QBrush>
 VehicleItem::VehicleItem(int id, double startX, double startY, double endX, double endY, bool isEmergency)
     : QObject(nullptr), QGraphicsEllipseItem(-6, -6, 12, 12), m_startX(startX), m_startY(startY), m_endX(endX), m_endY(endY), m_progress(0.0), m_isEmergency(isEmergency), m_flashState(false)
 {
+Q_UNUSED(id);
+    // --- UI UPGRADE: Drop Shadow ---
+    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect();
+    shadow->setBlurRadius(10);
+    shadow->setColor(QColor(0, 0, 0, 200));
+    shadow->setOffset(2, 2);
+    setGraphicsEffect(shadow);
     setPos(m_startX, m_startY);
     setZValue(20);
     if (m_isEmergency) {
