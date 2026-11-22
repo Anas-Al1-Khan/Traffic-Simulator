@@ -20,6 +20,7 @@ private:
     Vehicle* vehicles;  // Dynamic array of vehicles
     int maxVehicles;
     int vehicleCount;
+    int completedTrips;
 
 public:
     Simulation(Graph* g, int maxCapacity);
@@ -28,6 +29,7 @@ public:
     int getVehicleCount() const { return vehicleCount;  }
     bool isEmergencyVehicle(int index) const { return vehicles[index].isEmergency; }
     int getVehicleLocation(int index) const;
+    int getCompletedTrips() const { return completedTrips; }
     void spawnVehicle(int start, int end, bool emergency);
     void advanceTime(); // Moves vehicles to their next node
     void printState() const; // For testing in the console

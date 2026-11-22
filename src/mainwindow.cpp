@@ -83,7 +83,7 @@ void MainWindow::updateSimulation() {
 
     // Update the dashboard text
     int total = sim->getVehicleCount();
-    statsLabel->setText(QString("Total Vehicles: %1 | (Emergency vehicles are RED)").arg(total));
+    statsLabel->setText(QString("Total Vehicles: %1 | Completed Trips: %2 | (Emergency vehicles are RED)").arg(sim->getVehicleCount()).arg(sim->getCompletedTrips()));
 
     // Redraw everything
     scene->clear();

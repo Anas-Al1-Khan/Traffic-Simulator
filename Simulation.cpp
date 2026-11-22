@@ -6,6 +6,7 @@ Simulation::Simulation(Graph* g, int maxCapacity) {
     maxVehicles = maxCapacity;
     vehicles = new Vehicle[maxVehicles];
     vehicleCount = 0;
+    completedTrips = 0;
 }
 
 Simulation::~Simulation() {
@@ -60,6 +61,7 @@ void Simulation::advanceTime() {
         // If it's already at the last node, mark it finished
         if (v.currentIndex + 1 >= v.pathLength) {
             v.isFinished = true;
+            completedTrips++;
             std::cout << "Vehicle " << v.id << " completed its trip.\n";
         }
         else {
