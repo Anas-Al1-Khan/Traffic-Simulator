@@ -365,3 +365,5 @@ FodyWeavers.xsd
 build/
 build-*/
 cmake-build-*/
+*.vcxproj
+*.vcxproj.filters
