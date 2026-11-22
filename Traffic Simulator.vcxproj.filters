@@ -3,12 +3,13 @@
   <ItemGroup>
     <ClCompile Include="EmergencyQueue.cpp" />
     <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="ManualHashTable.cpp" />
     <ClCompile Include="ManualMinHeap.cpp" />
     <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="TrafficLight.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mainwindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EmergencyQueue.h" />
@@ -20,5 +21,8 @@
     <ClInclude Include="Stats.h" />
     <ClInclude Include="TrafficLight.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="src\ManualCircularQueue.h" />
+    <ClInclude Include="src\models.h" />
+    <ClInclude Include="src\mainwindow.h" />
   </ItemGroup>
 </Project>
