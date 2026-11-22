@@ -7,17 +7,18 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsTextItem>
 #include <QLabel>
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     // 1. Setup the Main Layout
     QWidget* centralWidget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(centralWidget);
-    layout->setContentsMargins(0, 0, 0, 10); // Tweak margins for a cleaner look
+    layout->setContentsMargins(0, 0, 0, 10); 
 
     // 2. Create Dashboard Label (HUD Style)
     statsLabel = new QLabel("Dashboard loading...", this);
     statsLabel->setStyleSheet(
-        "color: #00e6e6;"            // Neon cyan
+        "color: #00e6e6;"            
         "font-size: 18px;"
         "font-weight: bold;"
         "font-family: 'Segoe UI', Arial, sans-serif;"
@@ -30,10 +31,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     // 3. Setup the Visual Scene
     scene = new QGraphicsScene(this);
     scene->setSceneRect(0, 0, 800, 600);
-    scene->setBackgroundBrush(QColor(15, 15, 25)); // Dark midnight blue
+    scene->setBackgroundBrush(QColor(15, 15, 25)); 
 
     view = new QGraphicsView(scene, this);
-    view->setRenderHint(QPainter::Antialiasing, true); // Smooth lines
+    view->setRenderHint(QPainter::Antialiasing, true); 
     layout->addWidget(view);
 
     // 4. Add Close Road Button (Styled)
@@ -55,11 +56,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     layout->addWidget(closeRoadBtn);
     connect(closeRoadBtn, &QPushButton::clicked, this, &MainWindow::onCloseRoadClicked);
 
-    isCDRoadClosed = false; // Initialize flag
+    isCDRoadClosed = false; 
     setCentralWidget(centralWidget);
     setWindowTitle("Traffic Management Simulator - Final Prototype");
 
-    // 5. Setup Logic (Teammate's Graph and Simulation)
+    // 5. Setup Logic
     map = new Graph(5);
     map->addRoad(0, 1, 4); // A - B
     map->addRoad(0, 2, 2); // A - C
@@ -70,15 +71,13 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
     sim = new Simulation(map, 20);
 
-    // Spawn initial cars
     sim->spawnVehicle(0, 3, false);
     sim->spawnVehicle(0, 3, false);
-    sim->spawnVehicle(0, 3, true); // Emergency
+    sim->spawnVehicle(0, 3, true); 
 
     // 6. Draw initial state
     drawMap();
 
-    // Initialize tracking variables for animation
     for (int i = 0; i < sim->getVehicleCount(); i++) {
         m_lastLocations.push_back(sim->getVehicleLocation(i));
     }
@@ -87,7 +86,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     tickCounter = 0;
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::updateSimulation);
-    timer->start(1500); // 1.5 seconds per tick
+    timer->start(1500); 
 }
 
 MainWindow::~MainWindow() {
@@ -99,10 +98,9 @@ void MainWindow::updateSimulation() {
     sim->advanceTime();
     tickCounter++;
 
-    // Spawn a new vehicle every 2 ticks
     if (tickCounter % 2 == 0) {
         sim->spawnVehicle(0, 3, false); 
-        m_lastLocations.push_back(-2); // -2 means newly spawned
+        m_lastLocations.push_back(-2); 
         
         if (tickCounter % 4 == 0) {
             sim->spawnVehicle(0, 3, true); 
@@ -110,13 +108,11 @@ void MainWindow::updateSimulation() {
         }
     }
 
-    // Update the dashboard text
     statsLabel->setText(QString("TOTAL VEHICLES: %1  |  COMPLETED TRIPS: %2  |  (EMERGENCY = FLASHING BLUE)")
                         .arg(sim->getVehicleCount())
                         .arg(sim->getCompletedTrips()));
 
     // --- ANIMATION BRIDGE ---
-    // Check if any cars moved to a new node, and spawn a smooth animation for them
     for (int i = 0; i < sim->getVehicleCount(); i++) {
         int currentNode = sim->getVehicleLocation(i);
         int lastNode = m_lastLocations[i];
@@ -126,14 +122,11 @@ void MainWindow::updateSimulation() {
             QPointF endPos = getNodePosition(currentNode);
             bool isEmergency = sim->isEmergencyVehicle(i);
 
-            // Spawn the animated car
             VehicleItem* vehicle = new VehicleItem(i, startPos.x(), startPos.y(), endPos.x(), endPos.y(), isEmergency);
             scene->addItem(vehicle);
             m_activeVehicles.push_back(vehicle);
             vehicle->startMoving();
         }
-        
-        // Update our tracker
         m_lastLocations[i] = currentNode;
     }
 }
@@ -150,36 +143,33 @@ QPointF MainWindow::getNodePosition(int nodeId) {
 }
 
 void MainWindow::drawMap() {
-    // 1. Draw Background Grid (Cyberpunk style)
     QPen gridPen(QColor(35, 40, 50), 1);
-    for (int i = 0; i < 800; i += 40) {
-        scene->addLine(i, 0, i, 600, gridPen);
-    }
-    for (int i = 0; i < 600; i += 40) {
-        scene->addLine(0, i, 800, i, gridPen);
-    }
+    for (int i = 0; i < 800; i += 40) scene->addLine(i, 0, i, 600, gridPen);
+    for (int i = 0; i < 600; i += 40) scene->addLine(0, i, 800, i, gridPen);
 
-    // 2. Draw Roads (Thick asphalt with dashed center lines)
     QPen roadPen(QColor(50, 50, 50), 16); 
     QPen lanePen(Qt::white, 2, Qt::DashLine);
 
-    auto drawRoad = [&](int x1, int y1, int x2, int y2, bool isClosed) {
-        QPen p = isClosed ? QPen(Qt::red, 16) : roadPen;
-        scene->addLine(x1, y1, x2, y2, p);
-        
-        if (!isClosed) {
-            scene->addLine(x1, y1, x2, y2, lanePen); // White dashed lane line
-        }
+    auto drawRoad = [&](int x1, int y1, int x2, int y2) {
+        scene->addLine(x1, y1, x2, y2, roadPen);
+        scene->addLine(x1, y1, x2, y2, lanePen); 
     };
 
-    drawRoad(150, 150, 650, 150, false);           // A-B
-    drawRoad(150, 150, 150, 450, false);           // A-C
-    drawRoad(650, 150, 650, 450, false);           // B-D
-    drawRoad(150, 450, 650, 450, isCDRoadClosed);  // C-D (Dynamic)
-    drawRoad(150, 150, 400, 300, false);           // A-E
-    drawRoad(400, 300, 650, 450, false);           // E-D
+    drawRoad(150, 150, 650, 150); // A-B
+    drawRoad(150, 150, 150, 450); // A-C
+    drawRoad(650, 150, 650, 450); // B-D
+    drawRoad(150, 150, 400, 300); // A-E
+    drawRoad(400, 300, 650, 450); // E-D
 
-    // 3. Draw Intersections (Neon Glow + Node + Text)
+    // C-D Road (Dynamic - save the pointers!)
+    m_cdRoadLine = scene->addLine(150, 450, 650, 450, roadPen);
+    m_cdLaneLine = scene->addLine(150, 450, 650, 450, lanePen);
+    
+    if (isCDRoadClosed) {
+        m_cdRoadLine->setPen(QPen(Qt::red, 16));
+        m_cdLaneLine->hide();
+    }
+
     QPen nodePen(Qt::cyan, 3);
     QBrush nodeBrush(Qt::darkBlue);
     QFont font = scene->font();
@@ -197,7 +187,6 @@ void MainWindow::drawMap() {
         QGraphicsEllipseItem* node = scene->addEllipse(pos.x() - 25, pos.y() - 25, 50, 50, nodePen, nodeBrush);
         node->setZValue(2);
         
-        // Text Label
         QGraphicsTextItem* text = scene->addText(QString(QChar('A' + i)), font);
         text->setDefaultTextColor(Qt::white);
         text->setPos(pos.x() - 10, pos.y() - 15);
@@ -206,16 +195,24 @@ void MainWindow::drawMap() {
 }
 
 void MainWindow::onCloseRoadClicked() {
-    // Clear the scene and redraw the map to show the red road
-    scene->clear();
-    
     if (!isCDRoadClosed) {
-        map->closeRoad(2, 3); // Close C-D
+        map->closeRoad(2, 3); // Close C-D in the backend
         isCDRoadClosed = true;
+        
+        // Change the visual road to red WITHOUT clearing the scene
+        if (m_cdRoadLine) {
+            m_cdRoadLine->setPen(QPen(Qt::red, 16));
+            m_cdLaneLine->hide();
+        }
     }
     else {
-        map->addRoad(2, 3, 1); // Reopen C-D
+        map->addRoad(2, 3, 1); // Reopen C-D in the backend
         isCDRoadClosed = false;
+        
+        // Change the visual road back to gray WITHOUT clearing the scene
+        if (m_cdRoadLine) {
+            m_cdRoadLine->setPen(QPen(QColor(50, 50, 50), 16));
+            m_cdLaneLine->show();
+        }
     }
-    drawMap();
 }

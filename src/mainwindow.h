@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QGraphicsTextItem>
+#include <QGraphicsLineItem> // Added for the road toggling fix
 #include <QLabel>
 #include <QTimer>
 #include <vector>
@@ -37,9 +39,13 @@ private:
     QTimer* timer;
     bool isCDRoadClosed;
 
-    // For Day 4/5 Animation
+    // Pointers to the C-D road so we can turn it red without clearing the screen
+    QGraphicsLineItem* m_cdRoadLine = nullptr;
+    QGraphicsLineItem* m_cdLaneLine = nullptr;
+
+    // For Animation
     std::vector<VehicleItem*> m_activeVehicles;
-    std::vector<int> m_lastLocations; // Tracks where cars were last tick
+    std::vector<int> m_lastLocations; 
 };
 
 #endif // MAINWINDOW_H
