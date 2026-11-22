@@ -1,144 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="EmergencyQueue.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Simulation.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="tests\test_queue.cpp">
-      <Filter>tests</Filter>
-    </ClCompile>
-=======
     <ClCompile Include="ManualHashTable.cpp" />
-    <ClCompile Include="test_hashtable_main.cpp" />
     <ClCompile Include="ManualMinHeap.cpp" />
-    <ClCompile Include="EmergencyQueue.cpp" />
-    <ClCompile Include="TrafficLight.cpp" />
+    <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="Stats.cpp" />
-    <ClCompile Include="test_day5_main.cpp" />
->>>>>>> 4c931527fc4c6a68d88280f73573914c0e565028
+    <ClCompile Include="TrafficLight.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EmergencyQueue.h" />
     <ClInclude Include="HeaderFile.h" />
     <ClInclude Include="ManualCircularQueue.h" />
-    <ClInclude Include="Simulation.h" />
-    <ClInclude Include="Graph.h" />
-<<<<<<< HEAD
-    <ClInclude Include="src\ManualCircularQueue.h">
-      <Filter>src</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
-    <Text Include="build\CMakeCache.txt">
-      <Filter>build</Filter>
-    </Text>
-    <Text Include="build\CMakeFiles\TargetDirectories.txt">
-      <Filter>build\CMakeFiles</Filter>
-    </Text>
-    <Text Include="build\CMakeFiles\4.3.1-msvc1\VCTargetsPath.txt">
-      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{9579b53d-34cb-40ef-9f42-b6abc4766981}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build">
-      <UniqueIdentifier>{9eeb6eb1-6088-4381-a9c1-13fd9fe003fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\CMakeFiles">
-      <UniqueIdentifier>{48ab9b6c-60c5-48aa-8cb5-8b634830c08a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\CMakeFiles\4.3.1-msvc1">
-      <UniqueIdentifier>{e930fc4d-aaa8-4434-b2d9-68e1fcb4ca0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\CMakeFiles\64865a9f493fa6d1c989e1c50233f64e">
-      <UniqueIdentifier>{7cb84899-f27a-4ba7-9386-3b02f193d8d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX">
-      <UniqueIdentifier>{88a26373-9bbf-48b8-9b87-29da37efe59e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="tests">
-      <UniqueIdentifier>{0442916c-7d50-4784-8688-cb33367298ff}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="build\ALL_BUILD.vcxproj">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\ALL_BUILD.vcxproj.filters">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\cmake_install.cmake">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\test_queue.vcxproj">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\test_queue.vcxproj.filters">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\TrafficSim.slnx">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\ZERO_CHECK.vcxproj">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\ZERO_CHECK.vcxproj.filters">
-      <Filter>build</Filter>
-    </None>
-    <None Include="build\CMakeFiles\cmake.check_cache">
-      <Filter>build\CMakeFiles</Filter>
-    </None>
-    <None Include="build\CMakeFiles\CMakeConfigureLog.yaml">
-      <Filter>build\CMakeFiles</Filter>
-    </None>
-    <None Include="build\CMakeFiles\generate.stamp">
-      <Filter>build\CMakeFiles</Filter>
-    </None>
-    <None Include="build\CMakeFiles\generate.stamp.depend">
-      <Filter>build\CMakeFiles</Filter>
-    </None>
-    <None Include="build\CMakeFiles\generate.stamp.list">
-      <Filter>build\CMakeFiles</Filter>
-    </None>
-    <None Include="build\CMakeFiles\InstallScripts.json">
-      <Filter>build\CMakeFiles</Filter>
-    </None>
-    <None Include="build\CMakeFiles\64865a9f493fa6d1c989e1c50233f64e\generate.stamp.rule">
-      <Filter>build\CMakeFiles\64865a9f493fa6d1c989e1c50233f64e</Filter>
-    </None>
-    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeCXXCompiler.cmake">
-      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
-    </None>
-    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeDetermineCompilerABI_CXX.bin">
-      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
-    </None>
-    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeRCCompiler.cmake">
-      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
-    </None>
-    <None Include="build\CMakeFiles\4.3.1-msvc1\CMakeSystem.cmake">
-      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
-    </None>
-    <None Include="build\CMakeFiles\4.3.1-msvc1\VCTargetsPath.vcxproj">
-      <Filter>build\CMakeFiles\4.3.1-msvc1</Filter>
-    </None>
-    <None Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX\CompilerIdCXX.exe">
-      <Filter>build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX</Filter>
-    </None>
-    <None Include="build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX\CompilerIdCXX.vcxproj">
-      <Filter>build\CMakeFiles\4.3.1-msvc1\CompilerIdCXX</Filter>
-    </None>
-=======
     <ClInclude Include="ManualHashTable.h" />
     <ClInclude Include="ManualMinHeap.h" />
-    <ClInclude Include="EmergencyQueue.h" />
-    <ClInclude Include="TrafficLight.h" />
+    <ClInclude Include="Simulation.h" />
     <ClInclude Include="Stats.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
->>>>>>> 4c931527fc4c6a68d88280f73573914c0e565028
+    <ClInclude Include="TrafficLight.h" />
+    <ClInclude Include="Graph.h" />
   </ItemGroup>
 </Project>
