@@ -1,137 +1,143 @@
 #include "mainwindow.h"
-#include <QGraphicsEllipseItem>
-#include <QGraphicsLineItem>
 #include <QPen>
 #include <QBrush>
-#include <QFont>
-#include <QStatusBar>
-#include <QPainter>
-#include <QTimer>
-#include <cstdlib> // for rand()
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QGraphicsEllipseItem>
 
-MainWindow::MainWindow(QWidget* parent)
-    : QMainWindow(parent)
-{
-    setWindowTitle("Traffic Management Simulator - Day 3: Queue Integration");
-    resize(900, 700);
+MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
+    // 1. Setup the Main Layout
+    QWidget* centralWidget = new QWidget(this);
+    QVBoxLayout* layout = new QVBoxLayout(centralWidget);
 
-    m_scene = new QGraphicsScene(this);
-    m_scene->setSceneRect(0, 0, 900, 700);
-    m_scene->setBackgroundBrush(QColor(25, 28, 35));
+    // 2. Create Dashboard Label
+    statsLabel = new QLabel("Dashboard loading...", this);
+    statsLabel->setStyleSheet("color: white; font-size: 16px; font-weight: bold; padding: 10px;");
+    layout->addWidget(statsLabel);
 
-    m_view = new QGraphicsView(m_scene, this);
-    m_view->setRenderHint(QPainter::Antialiasing, true);
-    m_view->setDragMode(QGraphicsView::ScrollHandDrag);
-    setCentralWidget(m_view);
+    // 3. Setup the Visual Scene
+    scene = new QGraphicsScene(this);
+    scene->setSceneRect(0, 0, 800, 600);
+    scene->setBackgroundBrush(QColor(30, 30, 30)); // Dark theme
 
-    setupData();
-    buildScene();
-    
-    // Timer to simulate cars arriving every 1.5 seconds
-    QTimer* timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::simulateArrival);
-    timer->start(1500);
+    view = new QGraphicsView(scene, this);
+    layout->addWidget(view);
 
-    statusBar()->showMessage("Day 3 - Live queue sizes updating via QTimer");
+    setCentralWidget(centralWidget);
+    setWindowTitle("Traffic Management Simulator - Prototype");
+
+    // 4. Setup Logic (Using the 5 nodes A, B, C, D, E from your teammate's map)
+    map = new Graph(5);
+    map->addRoad(0, 1, 4); // A - B
+    map->addRoad(0, 2, 2); // A - C
+    map->addRoad(1, 3, 5); // B - D
+    map->addRoad(2, 3, 1); // C - D
+    map->addRoad(0, 4, 3); // A - E
+    map->addRoad(4, 3, 3); // E - D
+
+    sim = new Simulation(map, 20);
+
+    // Spawn some normal cars
+    sim->spawnVehicle(0, 3, false);
+    sim->spawnVehicle(0, 3, false);
+    // Spawn an emergency vehicle
+    sim->spawnVehicle(0, 3, true);
+
+    // 5. Draw initial state
+    drawMap();
+
+    // 6. Start Timer
+    tickCounter = 0;
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::updateSimulation);
+    timer->start(1500); // 1 tick = 1.5 seconds (updated in ms)
+
+
 }
 
-void MainWindow::setupData()
-{
-    // Populate Roads dynamically
-    m_roads.push_back({1, 150, 150, 750, 150}); // Top
-    m_roads.push_back({2, 150, 150, 150, 550}); // Left
-    m_roads.push_back({3, 750, 150, 750, 550}); // Right
-    m_roads.push_back({4, 150, 550, 750, 550}); // Bottom
-    m_roads.push_back({5, 150, 150, 750, 550}); // Diagonal
-
-    // Populate Intersections dynamically
-    m_intersections.push_back(Intersection(1, 150, 150, "A"));
-    m_intersections.push_back(Intersection(2, 750, 150, "B"));
-    m_intersections.push_back(Intersection(3, 150, 550, "C"));
-    m_intersections.push_back(Intersection(4, 750, 550, "D"));
-    m_intersections.push_back(Intersection(5, 450, 350, "E"));
+MainWindow::~MainWindow() {
+    delete map;
+    delete sim;
 }
 
-void MainWindow::buildScene()
-{
-    // 1. Draw all roads
-    for (size_t i = 0; i < m_roads.size(); ++i) {
-        drawRoad(m_roads[i]);
+void MainWindow::updateSimulation() {
+    sim->advanceTime();
+    tickCounter++;
+
+    // Spawn a new vehicle every 2 ticks (every 3 seconds)
+    if (tickCounter % 2 == 0) {
+        sim->spawnVehicle(0, 3, false); // Spawn from A to D
+        if (tickCounter % 4 == 0) {
+            sim->spawnVehicle(0, 3, true); // Spawn an emergency vehicle occasionally
+        }
     }
 
-    // 2. Draw all intersections & their queue labels
-    for (size_t i = 0; i < m_intersections.size(); ++i) {
-        drawIntersection(m_intersections[i]);
-    }
+    // Update the dashboard text
+    int total = sim->getVehicleCount();
+    statsLabel->setText(QString("Total Vehicles: %1 | (Emergency vehicles are RED)").arg(total));
+
+    // Redraw everything
+    scene->clear();
+    drawMap();
+    drawVehicles();
 }
 
-void MainWindow::drawIntersection(Intersection& intersection)
-{
-    const qreal radius = 32.0;
-
-    // Draw Circle
-    QGraphicsEllipseItem* circle = m_scene->addEllipse(
-        intersection.x - radius, intersection.y - radius,
-        2 * radius, 2 * radius,
-        QPen(QColor(0, 200, 255), 3), 
-        QBrush(QColor(35, 75, 115))
-    );
-    circle->setZValue(10);
-
-    // Draw Letter Label
-    QGraphicsSimpleTextItem* text = m_scene->addSimpleText(intersection.label);
-    QFont f = text->font();
-    f.setBold(true);
-    f.setPointSize(14);
-    text->setFont(f);
-    text->setBrush(Qt::white);
-    QRectF br = text->boundingRect();
-    text->setPos(intersection.x - br.width() / 2.0, intersection.y - br.height() / 2.0);
-    text->setZValue(11);
-
-    // Draw "Waiting: 0" Label (Below the intersection)
-    QGraphicsTextItem* queueLabel = m_scene->addText("Waiting: 0");
-    queueLabel->setDefaultTextColor(Qt::yellow);
-    QFont qf = queueLabel->font();
-    qf.setPointSize(10);
-    queueLabel->setFont(qf);
-    queueLabel->setPos(intersection.x - 30, intersection.y + radius + 5);
-    queueLabel->setZValue(11);
-
-    // Store the pointer so we can update it later
-    m_queueLabels.push_back(queueLabel);
-}
-
-void MainWindow::drawRoad(Road& road)
-{
-    QPen pen(QColor(200, 200, 200), 20);
-    pen.setCapStyle(Qt::RoundCap);
-    QGraphicsLineItem* line = m_scene->addLine(road.x1, road.y1, road.x2, road.y2, pen);
-    line->setZValue(0);
-}
-
-void MainWindow::simulateArrival()
-{
-    // Pick a random intersection (0 to 4)
-    int randomIndex = rand() % m_intersections.size();
-    Intersection& target = m_intersections[randomIndex];
-
-    // Add a car (represented by a random ID) to the queue
-    int carId = rand() % 1000 + 1;
-    
-    // Call YOUR custom queue's enqueue method
-    if (target.waitingCars.enqueue(carId)) {
-        updateQueueLabels();
-        statusBar()->showMessage(QString("Car %1 arrived at Intersection %2").arg(carId).arg(target.label));
-    } else {
-        statusBar()->showMessage(QString("Intersection %1 is FULL!").arg(target.label));
+QPointF MainWindow::getNodePosition(int nodeId) {
+    // These coordinates match the A, B, C, D, E layout in your screenshot
+    switch (nodeId) {
+    case 0: return QPointF(150, 150); // A
+    case 1: return QPointF(650, 150); // B
+    case 2: return QPointF(150, 450); // C
+    case 3: return QPointF(650, 450); // D
+    case 4: return QPointF(400, 300); // E
+    default: return QPointF(0, 0);
     }
 }
 
-void MainWindow::updateQueueLabels()
-{
-    for (size_t i = 0; i < m_intersections.size(); ++i) {
-        int count = m_intersections[i].waitingCars.size();
-        m_queueLabels[i]->setPlainText(QString("Waiting: %1").arg(count));
+void MainWindow::drawMap() {
+    QPen roadPen(Qt::gray, 8); // Thick roads
+
+    // Draw roads
+    scene->addLine(150, 150, 650, 150, roadPen); // A-B
+    scene->addLine(150, 150, 150, 450, roadPen); // A-C
+    scene->addLine(650, 150, 650, 450, roadPen); // B-D
+    scene->addLine(150, 450, 650, 450, roadPen); // C-D
+    scene->addLine(150, 150, 400, 300, roadPen); // A-E
+    scene->addLine(400, 300, 650, 450, roadPen); // E-D
+
+    // Draw Intersections
+    QPen nodePen(Qt::cyan, 3);
+    QBrush nodeBrush(Qt::darkBlue);
+    QFont font = scene->font();
+    font.setPointSize(16);
+    font.setBold(true);
+
+    for (int i = 0; i < 5; i++) {
+        QPointF pos = getNodePosition(i);
+        scene->addEllipse(pos.x() - 25, pos.y() - 25, 50, 50, nodePen, nodeBrush);
+
+        // Add the letter label
+        QGraphicsTextItem* text = scene->addText(QString(QChar('A' + i)), font);
+        text->setDefaultTextColor(Qt::white);
+        text->setPos(pos.x() - 10, pos.y() - 15);
+    }
+}
+
+void MainWindow::drawVehicles() {
+    for (int i = 0; i < sim->getVehicleCount(); i++) {
+        int nodeId = sim->getVehicleLocation(i);
+
+        if (nodeId != -1) {
+            QPointF pos = getNodePosition(nodeId);
+
+            // Properly check if this specific vehicle is an emergency
+            QBrush vehicleBrush = sim->isEmergencyVehicle(i) ? QBrush(Qt::red) : QBrush(Qt::green);
+
+            // Offset the cars slightly so a line of 3 cars doesn't look like 1 car
+            int offsetX = (i % 3) * 8;
+            int offsetY = (i % 3) * 8;
+
+            scene->addEllipse(pos.x() - 8 + offsetX, pos.y() - 8 + offsetY, 16, 16, QPen(Qt::NoPen), vehicleBrush);
+        }
     }
 }

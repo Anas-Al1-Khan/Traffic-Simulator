@@ -1,40 +1,34 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-
+#pragma once
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QGraphicsTextItem>
-#include <vector>
-#include "models.h"
+#include <QTimer>
+#include <QLabel>
+#include <QPushButton>
+#include "Graph.h"
+#include "Simulation.h"
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
+
 public:
-    explicit MainWindow(QWidget* parent = nullptr);
-    ~MainWindow() override = default;
+    MainWindow(QWidget* parent = nullptr);
+    ~MainWindow();
 
 private slots:
-    void simulateArrival(); // Triggered by QTimer
+    void updateSimulation(); // Runs every tick
 
 private:
-    void setupData();
-    void buildScene();
-    void updateQueueLabels();
-    
-    void drawIntersection(Intersection& intersection);
-    void drawRoad(Road& road);
+    int tickCounter;
+    QGraphicsScene* scene;
+    QGraphicsView* view;
+    QTimer* timer;
+    QLabel* statsLabel; // Dashboard text
 
-    QGraphicsScene* m_scene = nullptr;
-    QGraphicsView*  m_view  = nullptr;
+    Graph* map;
+    Simulation* sim;
 
-    // Core Data using std::vector
-    std::vector<Road> m_roads;
-    std::vector<Intersection> m_intersections;
-    
-    // GUI Pointers for fast updates
-    std::vector<QGraphicsTextItem*> m_queueLabels;
+    QPointF getNodePosition(int nodeId);
+    void drawMap();
+    void drawVehicles(); // NEW: Draws the cars
 };
-
-#endif // MAINWINDOW_H

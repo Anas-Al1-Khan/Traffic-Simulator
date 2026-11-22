@@ -57,13 +57,23 @@ void Simulation::advanceTime() {
         Vehicle& v = vehicles[i];
         if (v.isFinished) continue;
 
-        v.currentIndex++;
-
-        if (v.currentIndex >= v.pathLength - 1) {
+        // If it's already at the last node, mark it finished
+        if (v.currentIndex + 1 >= v.pathLength) {
             v.isFinished = true;
             std::cout << "Vehicle " << v.id << " completed its trip.\n";
         }
+        else {
+            // Otherwise, move to the next node
+            v.currentIndex++;
+        }
     }
+}
+
+int Simulation::getVehicleLocation(int index) const {
+    if (index >= 0 && index < vehicleCount && !vehicles[index].isFinished) {
+        return vehicles[index].path[vehicles[index].currentIndex];
+    }
+    return -1;
 }
 
 void Simulation::printState() const {
