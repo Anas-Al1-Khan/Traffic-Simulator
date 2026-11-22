@@ -1,36 +1,45 @@
-#pragma once
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QTimer>
 #include <QLabel>
-#include <QPushButton>
+#include <QTimer>
+#include <vector>
 #include "Graph.h"
 #include "Simulation.h"
+#include "vehicleitem.h"
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow
+{
     Q_OBJECT
-
 public:
-    MainWindow(QWidget* parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget* parent = nullptr);
+    ~MainWindow() override;
 
 private slots:
-    void updateSimulation(); // Runs every tick
+    void updateSimulation();
     void onCloseRoadClicked();
 
 private:
-    int tickCounter;
-    bool isCDRoadClosed; // Flag to track road state
+    void drawMap();
+    QPointF getNodePosition(int nodeId);
+
+    QLabel* statsLabel;
     QGraphicsScene* scene;
     QGraphicsView* view;
-    QTimer* timer;
-    QLabel* statsLabel; // Dashboard text
-
+    
     Graph* map;
     Simulation* sim;
+    
+    int tickCounter;
+    QTimer* timer;
+    bool isCDRoadClosed;
 
-    QPointF getNodePosition(int nodeId);
-    void drawMap();
-    void drawVehicles(); // NEW: Draws the cars
+    // For Day 4/5 Animation
+    std::vector<VehicleItem*> m_activeVehicles;
+    std::vector<int> m_lastLocations; // Tracks where cars were last tick
 };
+
+#endif // MAINWINDOW_H
