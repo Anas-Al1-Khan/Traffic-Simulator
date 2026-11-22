@@ -83,3 +83,23 @@ void Graph::Dijkstra(int start, int end, int* parent) {
     delete[] dist;
     delete[] visited;
 }
+
+void Graph::closeRoad(int src, int dest) {
+    // Since it's undirected, we update both directions
+    Road* curr = adjList[src];
+    while (curr != nullptr) {
+        if (curr->destinationId == dest) {
+            curr->weight = 99999; // Set to infinity
+        }
+        curr = curr->next;
+    }
+
+    curr = adjList[dest];
+    while (curr != nullptr) {
+        if (curr->destinationId == src) {
+            curr->weight = 99999;
+        }
+        curr = curr->next;
+    }
+    std::cout << "Road between " << src << " and " << dest << " has been CLOSED.\n";
+}

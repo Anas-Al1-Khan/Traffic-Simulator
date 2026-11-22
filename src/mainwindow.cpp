@@ -3,6 +3,7 @@
 #include <QBrush>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QPushButton>
 #include <QGraphicsEllipseItem>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
@@ -22,6 +23,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
     view = new QGraphicsView(scene, this);
     layout->addWidget(view);
+
+    // Add Close Road Button
+    QPushButton* closeRoadBtn = new QPushButton("Close Road C-D", this);
+    closeRoadBtn->setStyleSheet("background-color: #cc0000; color: white; font-weight: bold; padding: 10px;");
+    layout->addWidget(closeRoadBtn);
+    connect(closeRoadBtn, &QPushButton::clicked, this, &MainWindow::onCloseRoadClicked);
+
+    isCDRoadClosed = false; // Initialize flag
 
     setCentralWidget(centralWidget);
     setWindowTitle("Traffic Management Simulator - Prototype");
@@ -95,16 +104,24 @@ QPointF MainWindow::getNodePosition(int nodeId) {
 }
 
 void MainWindow::drawMap() {
+    // Draw roads
     QPen roadPen(Qt::gray, 8); // Thick roads
 
-    // Draw roads
     scene->addLine(150, 150, 650, 150, roadPen); // A-B
     scene->addLine(150, 150, 150, 450, roadPen); // A-C
     scene->addLine(650, 150, 650, 450, roadPen); // B-D
-    scene->addLine(150, 450, 650, 450, roadPen); // C-D
+
+    // C-D Road (Dynamic)
+    if (isCDRoadClosed) {
+        QPen closedPen(Qt::red, 8);
+        scene->addLine(150, 450, 650, 450, closedPen); // Draw red
+    }
+    else {
+        scene->addLine(150, 450, 650, 450, roadPen); // Draw gray
+    }
+
     scene->addLine(150, 150, 400, 300, roadPen); // A-E
     scene->addLine(400, 300, 650, 450, roadPen); // E-D
-
     // Draw Intersections
     QPen nodePen(Qt::cyan, 3);
     QBrush nodeBrush(Qt::darkBlue);
@@ -139,5 +156,16 @@ void MainWindow::drawVehicles() {
 
             scene->addEllipse(pos.x() - 8 + offsetX, pos.y() - 8 + offsetY, 16, 16, QPen(Qt::NoPen), vehicleBrush);
         }
+    }
+}
+
+void MainWindow::onCloseRoadClicked() {
+    if (!isCDRoadClosed) {
+        map->closeRoad(2, 3); // Close C-D
+        isCDRoadClosed = true;
+    }
+    else {
+        map->addRoad(2, 3, 1); // Reopen C-D
+        isCDRoadClosed = false;
     }
 }

@@ -17,9 +17,11 @@ public:
 
 private slots:
     void updateSimulation(); // Runs every tick
+    void onCloseRoadClicked();
 
 private:
     int tickCounter;
+    bool isCDRoadClosed; // Flag to track road state
     QGraphicsScene* scene;
     QGraphicsView* view;
     QTimer* timer;

@@ -25,6 +25,7 @@ public:
     ~Graph();
 
     void addRoad(int src, int dest, int weight);
+    void closeRoad(int src, int dest);
     void printGraph() const;
     int getNumIntersections() const { return intersections; }
 
