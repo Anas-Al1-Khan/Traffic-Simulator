@@ -4,26 +4,6 @@
 #include <cstddef>      // std::size_t
 #include <stdexcept>    // std::invalid_argument
 
-/**
- * ManualCircularQueue<T>
- * ------------------------------------------------------------------
- * A fixed-capacity FIFO queue built from scratch on a raw heap array.
- * NO STL containers are used (university rule).
- *
- * Layout (capacity = 5, after enqueue 10,20,30 and dequeue one):
- *
- *   index :   0     1     2     3     4
- *   array : [30] [  ] [  ] [10] [20]
- *             ^front        ^rear
- *
- *   m_front = index of the oldest element        (0 -> 3)
- *   m_rear  = index of the next free slot        (1 -> 4)
- *   m_count = 2
- *
- * All operations are O(1). Indices wrap with modulo arithmetic:
- *   next(i) = (i + 1) % capacity
- * ------------------------------------------------------------------
- */
 template <typename T>
 class ManualCircularQueue
 {
